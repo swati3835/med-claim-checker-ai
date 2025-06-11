@@ -1,9 +1,9 @@
-
 import { useState } from "react";
-import { FileText, Receipt, Bot, Zap } from "lucide-react";
+import { FileText, Receipt, Bot, Zap, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import UploadSection from "@/components/UploadSection";
 import ProcessingResults from "@/components/ProcessingResults";
@@ -14,6 +14,7 @@ const Index = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [hasProcessed, setHasProcessed] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handlePrescriptionUpload = (file: File) => {
     setPrescriptionFile(file);
@@ -66,6 +67,18 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-white">
       <Header />
+      
+      {/* Admin Access Button */}
+      <div className="fixed top-4 right-4 z-50">
+        <Button
+          onClick={() => navigate("/admin")}
+          variant="outline"
+          className="gap-2 bg-white/80 backdrop-blur-sm border-purple-200 hover:bg-purple-50"
+        >
+          <Settings className="w-4 h-4" />
+          Admin
+        </Button>
+      </div>
       
       <main className="container mx-auto px-6 py-8 space-y-8">
         {/* Hero Section */}
